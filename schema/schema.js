@@ -21,6 +21,9 @@ var authors = [
   { name: "Patrick Rothfuss", age: 44, id: "1" },
   { name: "Brandon Sanderson", age: 42, id: "2" },
   { name: "Terry Pratchett", age: 66, id: "3" },
+  { name: "Patrick Rothfuss", age: 44, id: "4" },
+  { name: "Brandon Sanderson", age: 42, id: "5" },
+  { name: "Terry Pratchett", age: 66, id: "6" },
 ];
 const BookType = new GraphQLObjectType({
   name: "Book",
@@ -71,6 +74,13 @@ const RootQuery = new GraphQLObjectType({
         return _.find(authors, { id: args.id });
       },
     },
+    books:{
+      type:new GraphQLList(BookType),
+      resolve(parent,args){
+        return books;
+      }
+      
+    }
   },
 });
 module.exports = new GraphQLSchema({
